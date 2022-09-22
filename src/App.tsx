@@ -6,6 +6,10 @@ export const buttonCss = 'bg-blue-400 border border-gray-100 mx-2 px-2 rounded t
 function App() {
     const [count, setCount] = useState<number>(0)
 
+    const increment = (n: number) => {return n+ 1}
+    const decrement = (n: number) => {return n-1}
+    const reset = (n: number) => {return 0;}
+
   return (
       <main>
         <div className="App container mx-auto bg-gray-200 rounded-xl shadow border p-8 m-10 w-80">
@@ -17,9 +21,9 @@ function App() {
             </p>
         </div>
           <div className='flex justify-center'>
-              <button className={buttonCss} onClick={() => setCount(count+1)}>Increment</button>
-              <button className={buttonCss} onClick={() => setCount(0)}>Reset</button>
-              <button className={buttonCss} onClick={() => setCount(count -1)}>Decrement</button>
+              <button className={buttonCss} onClick={() => setCount(increment)}>Increment</button>
+              <button className={buttonCss} onClick={() => setCount(reset)}>Reset</button>
+              <button className={buttonCss} onClick={() => setCount(decrement)}>Decrement</button>
           </div>
           <div className='flex justify-center mt-24 font-semibold text-8xl'>{count}</div>
       </main>
