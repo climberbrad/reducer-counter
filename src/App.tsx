@@ -45,13 +45,13 @@ const myReducer = (state: actionEvent, action: actionEvent): actionEvent => {
 
 function App() {
     const textInputRef = useRef<HTMLInputElement>(null);
-    const [count, dispatch] = useReducer(myReducer, defaultValue)
+    const [state, dispatch] = useReducer(myReducer, defaultValue)
 
     // handlers remove any business logic from the layout code
-    const increment = () => { dispatch({ ...count, type: actionEnum.INCREMENT})}
-    const decrement = () => { dispatch({ ...count, type: actionEnum.DECREMENT}) }
-    const reset = () => { dispatch({ ...count, type: actionEnum.RESET}) }
-    const updateIncrementor = () => {dispatch({ ...count, type: actionEnum.UPDATE_INCREMENTOR, incrementor: Number(textInputRef?.current?.value)})}
+    const increment = () => { dispatch({ ...state, type: actionEnum.INCREMENT})}
+    const decrement = () => { dispatch({ ...state, type: actionEnum.DECREMENT}) }
+    const reset = () => { dispatch({ ...state, type: actionEnum.RESET}) }
+    const updateIncrementor = () => {dispatch({ ...state, type: actionEnum.UPDATE_INCREMENTOR, incrementor: Number(textInputRef?.current?.value)})}
 
     // NO business logic, only layout!
   return (
@@ -72,10 +72,10 @@ function App() {
           <div className='flex justify-center mt-2'>
               <div className='text-sm font-semibold mr-1 mt-0.5'>Incrementor:</div>
               <div>
-                  <input value={count.incrementor} onChange={updateIncrementor} ref={textInputRef} defaultValue={1} className='border border-1 rounded w-12 pl-2' type='number' />
+                  <input value={state.incrementor} onChange={updateIncrementor} ref={textInputRef} defaultValue={1} className='border border-1 rounded w-12 pl-2' type='number' />
               </div>
           </div>
-          <div className='flex justify-center mt-24 font-semibold text-8xl'>{count.value}</div>
+          <div className='flex justify-center mt-24 font-semibold text-8xl'>{state.value}</div>
       </main>
   );
 }
