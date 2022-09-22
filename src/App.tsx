@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 
 export const buttonCss = 'bg-blue-400 border border-gray-100 mx-2 px-2 rounded text-white hover:bg-gray-300 hover:text-black font-semibold'
 
 function App() {
-    const count = 0;
+    const [count, setCount] = useState<number>(0)
 
   return (
       <main>
@@ -17,9 +17,9 @@ function App() {
             </p>
         </div>
           <div className='flex justify-center'>
-              <button className={buttonCss}>Increment</button>
-              <button className={buttonCss}>Reset</button>
-              <button className={buttonCss}>Decrement</button>
+              <button className={buttonCss} onClick={() => setCount(count+1)}>Increment</button>
+              <button className={buttonCss} onClick={() => setCount(0)}>Reset</button>
+              <button className={buttonCss} onClick={() => setCount(count -1)}>Decrement</button>
           </div>
           <div className='flex justify-center mt-24 font-semibold text-8xl'>{count}</div>
       </main>
