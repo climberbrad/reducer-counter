@@ -1,14 +1,31 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
 import './App.css';
 
 export const buttonCss = 'bg-blue-400 border border-gray-100 mx-2 px-2 rounded text-white hover:bg-gray-300 hover:text-black font-semibold'
 
 function App() {
-    const [count, setCount] = useState<number>(0)
 
-    const increment = (n: number) => {return n+ 1}
-    const decrement = (n: number) => {return n-1}
-    const reset = (n: number) => {return 0;}
+    interface counterAction  {
+        type: string,
+    }
+
+    const myReducer = (state: number, action: counterAction): number => {
+        switch(action.type) {
+            case 'INCREMENT':
+                return state + 1;
+            case 'DECREMENT':
+                return state - 1;
+            case 'RESET':
+                return 0;
+            default: return state;
+        }
+    }
+
+    const [count, dispatch] = useReducer(myReducer, 0)
+
+    const increment = () => { dispatch({type: 'INCREMENT'}) }
+    const decrement = () => { dispatch({type: 'DECREMENT'}) }
+    const reset = () => { dispatch({type: 'RESET'}) }
 
   return (
       <main>
@@ -21,9 +38,9 @@ function App() {
             </p>
         </div>
           <div className='flex justify-center'>
-              <button className={buttonCss} onClick={() => setCount(increment)}>Increment</button>
-              <button className={buttonCss} onClick={() => setCount(reset)}>Reset</button>
-              <button className={buttonCss} onClick={() => setCount(decrement)}>Decrement</button>
+              <button className={buttonCss} onClick={increment}>Increment</button>
+              <button className={buttonCss} onClick={reset}>Reset</button>
+              <button className={buttonCss} onClick={decrement}>Decrement</button>
           </div>
           <div className='flex justify-center mt-24 font-semibold text-8xl'>{count}</div>
       </main>
